@@ -49,9 +49,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "INSTALLATION.html#CmdStan-installation-1",
+    "location": "INSTALLATION.html#cmdstan-installation-1",
     "page": "Installation",
-    "title": "CmdStan installation",
+    "title": "cmdstan installation",
     "category": "section",
     "text": ""
 },
@@ -61,7 +61,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Installation",
     "title": "Minimal requirement",
     "category": "section",
-    "text": "To run this version of the CmdStan.jl package on your local machine, it assumes that the  CmdStan executable is properly installed.In order for CmdStan.jl to find the CmdStan executable you can1.1) set the environment variable CMDSTAN_HOME to point to the CmdStan directory, e.g. addexport CMDSTAN_HOME=/Users/rob/Projects/Stan/cmdstan\nlaunchctl setenv CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstanto .bash_profile. I typically prefer not to include the cmdstan version number in the path so no update is needed when CmdStan is updated.Currently tested with CmdStan 2.16.0."
+    "text": "Note: CmdStan.jl and CmdStan refer this Julia package. The executable C++ program is \'cmdstan\'.To run this version of the CmdStan.jl package on your local machine, it assumes that the  cmdstan executable is properly installed.In order for CmdStan.jl to find the cmdstan you need to set the environment variable CMDSTAN_HOME to point to the cmdstan directory, e.g. addexport CMDSTAN_HOME=/Users/rob/Projects/Stan/cmdstan\nlaunchctl setenv CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstanto .bash_profile. I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.Currently tested with cmdstan 2.17.1"
 },
 
 {
@@ -69,7 +69,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Installation",
     "title": "Additional OSX options",
     "category": "section",
-    "text": "Thanks to Robert Feldt and the brew/Homebrew.jl folks, on OSX, in addition to the user following the steps in Stan\'s CmdStan User\'s Guide, CmdStan can also be installed using brew or Julia\'s Homebrew. Executing in a terminal:\n ```\n brew tap homebrew/science\n brew install cmdstan\n ```\n should install the latest available (on Homebrew) cmdstan in /usr/local/Cellar/cmdstan/x.x.x\n \n Or, from within the Julia REPL:\n ```\n using Homebrew\n Homebrew.add(\"homebrew/science/cmdstan\")\n ```\n will install CmdStan in ~/.julia/v0.x/Homebrew/deps/usr/Cellar/cmdstan/x.x.x."
+    "text": "Thanks to Robert Feldt and the brew folks, in addition to the user following the steps in Stan\'s cmdstan User\'s Guide, cmdstan can also be installed using brew or Julia\'s Homebrew. Executing in a terminal:\n ```\n brew tap homebrew/science\n brew install cmdstan\n ```\n should install the latest available (on Homebrew) cmdstan in /usr/local/Cellar/cmdstan/x.x.x\n \n Or, from within the Julia REPL:\n ```cmdstan  Homebrew\n Homebrew.add(\"homebrew/science/cmdstan\")\n ```\n will install CmdStan in ~/.julia/v0.x/Homebrew/deps/usr/Cellar/cmdstan/x.x.x."
 },
 
 {
@@ -141,7 +141,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Approach",
     "category": "section",
-    "text": "A version of a Julia package is labeled (tagged) as v\"major.minor.patch\".My intention is to update the patch level whenever I make updates which are not visible to any of the existing examples.New functionality will be introduced in minor level updates. This includes adding new examples, tests and the introduction of new arguments if they default to previous behavior, e.g. in v\"1.1.0\" the useMamba and init arguments to Stanmodel().Changes that require updates to some examples bump the major level.Updates for new releases of Julia and CmdStan bump the appropriate level."
+    "text": "A version of a Julia package is labeled (tagged) as v\"major.minor.patch\".My intention is to update the patch level whenever I make updates which are not visible to any of the existing examples.New functionality will be introduced in minor level updates. This includes adding new examples, tests and the introduction of new arguments if they default to previous behavior, e.g. in v\"1.1.0\" the useMamba and init arguments to Stanmodel().Changes that require updates to some examples bump the major level.Updates for new releases of Julia and cmdstan bump the appropriate level."
 },
 
 {
@@ -149,7 +149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Testing",
     "category": "section",
-    "text": "Version 1.0 of the package has been tested on Mac OSX 10.13, Julia 0.7- and CmdStan 2.18."
+    "text": "Version 1.0 of the package has been tested on Mac OSX 10.13, Julia 0.7- and cmdstan 2.18."
 },
 
 {
@@ -181,7 +181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "CmdStan.CMDSTAN_HOME",
     "category": "constant",
-    "text": "The directory which contains the CmdStan executables such as bin/stanc and  bin/stansummary. Inferred from Main.CMDSTAN_HOME or ENV[\"CMDSTAN_HOME\"] when available. Use set_cmdstan_home! to modify.\n\n\n\n\n\n"
+    "text": "The directory which contains the cmdstan executables such as bin/stanc and  bin/stansummary. Inferred from Main.CMDSTAN_HOME or ENV[\"CMDSTAN_HOME\"] when available. Use set_cmdstan_home! to modify.\n\n\n\n\n\n"
 },
 
 {
@@ -213,7 +213,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "CmdStan.Stanmodel",
     "category": "type",
-    "text": "Method Stanmodel\n\nCreate a Stanmodel. \n\nConstructors\n\nStanmodel(\n  method=Sample();\n  name=\"noname\", \n  nchains=4,\n  num_warmup=1000, \n  num_samples=1000,\n  thin=1,\n  model=\"\",\n  monitors=String[],\n  data=DataDict[],\n  random=Random(),\n  init=DataDict[],\n  output=Output(),\n  pdir::String=pwd(),\n  useMamba=true,\n  mambaThinning=1\n)\n\n\nRequired arguments\n\n* `method::Method`            : See ?Method\n\nOptional arguments\n\n* `name::String`               : Name for the model\n* `nchains::Int`               : Number of chains, if possible execute in parallel\n* `num_warmup::Int`            : Number of samples used for num_warmupation \n* `num_samples::Int`           : Sample iterations\n* `thin::Int`                  : Stan thinning factor\n* `model::String`              : Stan program source\n* `data::DataDict[]`           : Observed input data as an array of Dicts\n* `random::Random`             : Random seed settings\n* `init::DataDict[]`           : Initial values for parameters in parameter block\n* `output::Output`             : File output options\n* `pdir::String`               : Working directory\n* `monitors::String[] `        : Filter for variables used in Mamba post-processing\n* `useMamba::Bool`             : Use Mamba Chains for diagnostics and graphics\n* `mambaThinning::Int`         : Additional thinning factor in Mamba Chains\n\nExample\n\nbernoullimodel = \"\ndata { \n  int<lower=1> N; \n  int<lower=0,upper=1> y[N];\n} \nparameters {\n  real<lower=0,upper=1> theta;\n} \nmodel {\n  theta ~ beta(1,1);\n  y ~ bernoulli(theta);\n}\n\"\n\nstanmodel = Stanmodel(num_samples=1200, thin=2, name=\"bernoulli\", model=bernoullimodel);\n\nRelated help\n\n?stan                          : Run a Stanmodel\n?Sample                        : Sampling settings\n?Method                       : List of available methods\n?Output                        : Output file settings\n?DataDict                      : Input data dictionaries, will be converted to R syntax\n\n\n\n\n\n"
+    "text": "Method Stanmodel\n\nCreate a Stanmodel. \n\nConstructors\n\nStanmodel(\n  method=Sample();\n  name=\"noname\", \n  nchains=4,\n  num_warmup=1000, \n  num_samples=1000,\n  thin=1,\n  model=\"\",\n  monitors=String[],\n  data=DataDict[],\n  random=Random(),\n  init=DataDict[],\n  output=Output(),\n  pdir::String=pwd()\n)\n\n\nRequired arguments\n\n* `method::Method`            : See ?Method\n\nOptional arguments\n\n* `name::String`               : Name for the model\n* `nchains::Int`               : Number of chains, if possible execute in parallel\n* `num_warmup::Int`            : Number of samples used for num_warmupation \n* `num_samples::Int`           : Sample iterations\n* `thin::Int`                  : Stan thinning factor\n* `model::String`              : Stan program source\n* `data::DataDict[]`           : Observed input data as an array of Dicts\n* `random::Random`             : Random seed settings\n* `init::DataDict[]`           : Initial values for parameters in parameter block\n* `output::Output`             : File output options\n* `pdir::String`               : Working directory\n* `monitors::String[] `        : Filter for variables used in Mamba post-processing\n\nExample\n\nbernoullimodel = \"\ndata { \n  int<lower=1> N; \n  int<lower=0,upper=1> y[N];\n} \nparameters {\n  real<lower=0,upper=1> theta;\n} \nmodel {\n  theta ~ beta(1,1);\n  y ~ bernoulli(theta);\n}\n\"\n\nstanmodel = Stanmodel(num_samples=1200, thin=2, name=\"bernoulli\", model=bernoullimodel);\n\nRelated help\n\n?stan                          : Run a Stanmodel\n?Sample                        : Sampling settings\n?Method                       : List of available methods\n?Output                        : Output file settings\n?DataDict                      : Input data dictionaries, will be converted to R syntax\n\n\n\n\n\n"
 },
 
 {
@@ -237,7 +237,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "CmdStan.stan",
     "category": "function",
-    "text": "stan\n\nExecute a Stan model. \n\nMethod\n\nrc, sim = stan(\n  model::Stanmodel, \n  data=Nothing, \n  ProjDir=pwd();\n  init=Nothing,\n  summary=true, \n  diagnostics=false, \n  CmdStanDir=CMDSTAN_HOME\n)\n\nRequired arguments\n\n* `model::Stanmodel`              : See ?Method\n\nOptional positional arguments\n\n* `data=Nothing`                     : Observed input data dictionary \n* `ProjDir=pwd()`                 : Project working directory\n\nKeyword arguments\n\n* `init=Nothing`                     : Initial parameter value dictionary\n* `summary=true`                  : Use CmdStan\'s stansummary to display results\n* `diagnostics=false`             : Generate diagnostics file\n* `CmdStanDir=CMDSTAN_HOME`       : Location of CmdStan directory\n\nReturn values\n\n* `rc::Int`                       : Return code from stan(), rc == 0 if all is well\n* `sim`                           : Chain results\n\nExamples\n\n# no data, use default ProjDir (pwd)\nstan(mymodel)\n# default ProjDir (pwd)\nstan(mymodel, mydata)\n# specify ProjDir\nstan(mymodel, mydata, \"~/myproject/\")\n# keyword arguments\nstan(mymodel, mydata, \"~/myproject/\", diagnostics=true, summary=false)\n# use default ProjDir (pwd), with keyword arguments\nstan(mymodel, mydata, diagnostics=true, summary=false)\n\nRelated help\n\n?Stanmodel                      : Create a StanModel\n\n\n\n\n\n"
+    "text": "stan\n\nExecute a Stan model. \n\nMethod\n\nrc, sim = stan(\n  model::Stanmodel, \n  data=Nothing, \n  ProjDir=pwd();\n  init=Nothing,\n  summary=true, \n  diagnostics=false, \n  CmdStanDir=CMDSTAN_HOME\n)\n\nRequired arguments\n\n* `model::Stanmodel`              : See ?Method\n\nOptional positional arguments\n\n* `data=Nothing`                     : Observed input data dictionary \n* `ProjDir=pwd()`                 : Project working directory\n\nKeyword arguments\n\n* `init=Nothing`                     : Initial parameter value dictionary\n* `summary=true`                  : Use CmdStan\'s stansummary to display results\n* `diagnostics=false`             : Generate diagnostics file\n* `CmdStanDir=CMDSTAN_HOME`       : Location of cmdstan directory\n\nReturn values\n\n* `rc::Int`                       : Return code from stan(), rc == 0 if all is well\n* `sim`                           : Chain results\n\nExamples\n\n# no data, use default ProjDir (pwd)\nstan(mymodel)\n# default ProjDir (pwd)\nstan(mymodel, mydata)\n# specify ProjDir\nstan(mymodel, mydata, \"~/myproject/\")\n# keyword arguments\nstan(mymodel, mydata, \"~/myproject/\", diagnostics=true, summary=false)\n# use default ProjDir (pwd), with keyword arguments\nstan(mymodel, mydata, diagnostics=true, summary=false)\n\nRelated help\n\n?Stanmodel                      : Create a StanModel\n\n\n\n\n\n"
 },
 
 {
@@ -245,7 +245,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "CmdStan.stan_summary",
     "category": "method",
-    "text": "Method stan_summary\n\nDisplay CmdStan summary \n\nMethod\n\nstan_summary(\n  filecmd::Cmd; \n  CmdStanDir=CMDSTAN_HOME\n)\n\nRequired arguments\n\n* `filecmd::Cmd`                : Run command containing names of sample files\n\nOptional arguments\n\n* CmdStanDir=CMDSTAN_HOME       : CmdStan directory for stansummary program\n\nRelated help\n\n?Stan.stan                      : Create a StanModel\n\n\n\n\n\n"
+    "text": "Method stan_summary\n\nDisplay cmdstan summary \n\nMethod\n\nstan_summary(\n  filecmd::Cmd; \n  CmdStanDir=CMDSTAN_HOME\n)\n\nRequired arguments\n\n* `filecmd::Cmd`                : Run command containing names of sample files\n\nOptional arguments\n\n* CmdStanDir=CMDSTAN_HOME       : cmdstan directory for stansummary program\n\nRelated help\n\n?Stan.stan                      : Create a StanModel\n\n\n\n\n\n"
 },
 
 {
@@ -253,7 +253,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "CmdStan.stan_summary",
     "category": "method",
-    "text": "Method stan_summary\n\nDisplay CmdStan summary \n\nMethod\n\nstan_summary(\n  file::String; \n  CmdStanDir=CMDSTAN_HOME\n)\n\nRequired arguments\n\n* `file::String`                : Name of file with samples\n\nOptional arguments\n\n* CmdStanDir=CMDSTAN_HOME       : CmdStan directory for stansummary program\n\nRelated help\n\n?Stan.stan                      : Execute a StanModel\n\n\n\n\n\n"
+    "text": "Method stan_summary\n\nDisplay cmdstan summary \n\nMethod\n\nstan_summary(\n  file::String; \n  CmdStanDir=CMDSTAN_HOME\n)\n\nRequired arguments\n\n* `file::String`                : Name of file with samples\n\nOptional arguments\n\n* CmdStanDir=CMDSTAN_HOME       : cmdstan directory for stansummary program\n\nRelated help\n\n?Stan.stan                      : Execute a StanModel\n\n\n\n\n\n"
 },
 
 {
@@ -414,46 +414,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Types",
     "category": "section",
     "text": "CmdStan.Method\nCmdStan.Sample\nCmdStan.Adapt\nCmdStan.SamplingAlgorithm\nCmdStan.Hmc\nCmdStan.Metric\nCmdStan.Engine\nCmdStan.Nuts\nCmdStan.Static\nCmdStan.Diagnostics\nCmdStan.Gradient\nCmdStan.Diagnose\nCmdStan.OptimizeAlgorithm\nCmdStan.Optimize\nCmdStan.Lbfgs\nCmdStan.Bfgs\nCmdStan.Newton\nCmdStan.Variational"
-},
-
-{
-    "location": "index.html#CmdStan.cmdline",
-    "page": "Home",
-    "title": "CmdStan.cmdline",
-    "category": "function",
-    "text": "cmdline\n\nRecursively parse the model to construct command line. \n\nMethod\n\ncmdline(m)\n\nRequired arguments\n\n* `m::Stanmodel`                : Stanmodel\n\nRelated help\n\n?Stanmodel                      : Create a StanModel\n\n\n\n\n\n"
-},
-
-{
-    "location": "index.html#CmdStan.check_dct_type",
-    "page": "Home",
-    "title": "CmdStan.check_dct_type",
-    "category": "function",
-    "text": "checkdcttype\n\nCheck if dct == Dict{String, Any}[] and has length > 0. \n\nMethod\n\ncheck_dct_type(dct)\n\nRequired arguments\n\n* `dct::Dict{String, Any}`      : Observed data or parameter init data\n\n\n\n\n\n"
-},
-
-{
-    "location": "index.html#CmdStan.update_R_file",
-    "page": "Home",
-    "title": "CmdStan.update_R_file",
-    "category": "function",
-    "text": "updateRfile\n\nRewrite a dictionary of observed data or initial parameter values in R dump file format to a file. \n\nMethod\n\nupdate_R_file{T<:Any}(file, dct)\n\nRequired arguments\n\n* `file::String`                : R file name\n* `dct::Dict{String, T}`        : Dictionary to format in R\n\n\n\n\n\n"
-},
-
-{
-    "location": "index.html#CmdStan.par",
-    "page": "Home",
-    "title": "CmdStan.par",
-    "category": "function",
-    "text": "par\n\nRewrite dct to R format in file. \n\nMethod\n\npar(cmds)\n\nRequired arguments\n\n* `cmds::Array{Base.AbstractCmd,1}`    : Multiple commands to concatenate\n\nor\n\n* `cmd::Base.AbstractCmd`              : Single command to be\n* `n::Number`                            inserted n times into cmd\n\n\nor\n* `cmd::Array{String, 1}`              : Array of cmds as Strings\n\n\n\n\n\n"
-},
-
-{
-    "location": "index.html#CmdStan.read_stanfit-Tuple{Stanmodel}",
-    "page": "Home",
-    "title": "CmdStan.read_stanfit",
-    "category": "method",
-    "text": "read_stanfit\n\nRewrite dct to R format in file. \n\nMethod\n\npar(cmds)\n\nRequired arguments\n\n* `cmds::Array{Base.AbstractCmd,1}`    : Multiple commands to concatenate\n\nor\n\n* `cmd::Base.AbstractCmd`              : Single command to be\n* `n::Number`                            inserted n times into cmd\n\n\nor\n* `cmd::Array{String, 1}`              : Array of cmds as Strings\n\n\n\n\n\n"
 },
 
 {
