@@ -73,6 +73,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "INSTALLATION.html#Linux-options-1",
+    "page": "Installation",
+    "title": "Linux options",
+    "category": "section",
+    "text": "For those who are using a Linux based operating system. These are the cmdstan installation instructions using Linuxbrew. Please Note that you must have Linuxbrew installed on your machine prior to going through these steps.Executing in a terminal:\n\'\'\'\nbrew tap brewsci/science\nbrew install cmdstan\n\'\'\'\nshould install the latest available cmdstan in /home/usrname/.linuxbrew/Cellar/cmdstan/x.x.x:Afterward you would then use the setcmdstanhome!() in the REPL to designate where your local installation of cmdstan lives."
+},
+
+{
     "location": "WALKTHROUGH.html#",
     "page": "Walkthrough",
     "title": "Walkthrough",
