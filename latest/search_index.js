@@ -457,11 +457,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.update_R_file",
+    "location": "index.html#CmdStan.convert_a3d",
     "page": "Home",
-    "title": "CmdStan.update_R_file",
+    "title": "CmdStan.convert_a3d",
     "category": "function",
-    "text": "updateRfile\n\nRewrite a dictionary of observed data or initial parameter values in R dump file format to a file. \n\nMethod\n\nupdate_R_file{T<:Any}(file, dct)\n\nRequired arguments\n\n* `file::String`                : R file name\n* `dct::Dict{String, T}`        : Dictionary to format in R\n\n\n\n\n\n"
+    "text": "convert_a3d\n\nConvert the output file created by cmdstan to the shape of choice. Currently . \n\nMethod\n\nconvert_a3d(a3d_array, cnames, ::Val{Symbol})\n\nRequired arguments\n\n* `a3d_array::Array{Float64}(n_draws, n_variables, n_chains`      : Read in from output files created by cmdstan                                   \n* `cnames::Vector{AbstractString}`                                                 : Monitored variable names\n* `::Val{Symbol}`                                                                             : Output format\n\nMethod called is based on the output_format defined in the stanmodel, e.g.:\n\n   stanmodel = Stanmodel(num_samples=1200, thin=2, name=\"bernoulli\", \n   model=bernoullimodel, output_format=:array);\n\nCurrent formats supported are:\n\n1. :array (a3d_array format, the default for CmdStan)\n2. :dataFrame (DataFrame)\n3. :mambachains (Mamba.Chains object)\n4. :mcmcchain (TuringLang/Chains object)\n\nOptions 2 through 4 are respectively provided by the packages StanDataFrames, StanMamba and StanMCMCChain.\n\nReturn values\n\n* `res`                       : Draws converted to the specified format.\n\n\n\n\n\n"
+},
+
+{
+    "location": "index.html#CmdStan.Fixed_param",
+    "page": "Home",
+    "title": "CmdStan.Fixed_param",
+    "category": "type",
+    "text": "Fixed_param type and constructor\n\nSettings for algorithm=Fixed_param() in Sample(). \n\nMethod\n\nFixed_param()\n\nRelated help\n\n?Sample                        : Sampling settings\n?Engine                        : Engine for Hamiltonian Monte Carlo\n?Nuts                          : Settings for Nuts\n?Static                        : Settings for Static\n?Metric                        : Base manifold geometries\n\n\n\n\n\n"
 },
 
 {
@@ -497,22 +505,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#CmdStan.convert_a3d",
-    "page": "Home",
-    "title": "CmdStan.convert_a3d",
-    "category": "function",
-    "text": "convert_a3d\n\nConvert the output file created by cmdstan to the shape of choice. Currently . \n\nMethod\n\nconvert_a3d(a3d_array, cnames, ::Val{Symbol})\n\nRequired arguments\n\n* `a3d_array::Array{Float64}(n_draws, n_variables, n_chains`      : Read in from output files created by cmdstan                                   \n* `cnames::Vector{AbstractString}`                                                 : Monitored variable names\n* `::Val{Symbol}`                                                                             : Output format\n\nMethod called is based on the output_format defined in the stanmodel, e.g.:\n\n   stanmodel = Stanmodel(num_samples=1200, thin=2, name=\"bernoulli\", \n   model=bernoullimodel, output_format=:array);\n\nCurrent formats supported are:\n\n1. :array (a3d_array format, the default for CmdStan)\n2. :dataFrame (DataFrame)\n3. :mambachains (Mamba.Chains object)\n4. :mcmcchain (TuringLang/Chains object)\n\nOptions 2 through 4 are respectively provided by the packages StanDataFrames, StanMamba and StanMCMCChain.\n\nReturn values\n\n* `res`                       : Draws converted to the specified format.\n\n\n\n\n\n"
-},
-
-{
-    "location": "index.html#CmdStan.Fixed_param",
-    "page": "Home",
-    "title": "CmdStan.Fixed_param",
-    "category": "type",
-    "text": "Fixed_param type and constructor\n\nSettings for algorithm=Fixed_param() in Sample(). \n\nMethod\n\nFixed_param()\n\nRelated help\n\n?Sample                        : Sampling settings\n?Engine                        : Engine for Hamiltonian Monte Carlo\n?Nuts                          : Settings for Nuts\n?Static                        : Settings for Static\n?Metric                        : Base manifold geometries\n\n\n\n\n\n"
-},
-
-{
     "location": "index.html#CmdStan.read_diagnose",
     "page": "Home",
     "title": "CmdStan.read_diagnose",
@@ -521,11 +513,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "index.html#CmdStan.update_R_file",
+    "page": "Home",
+    "title": "CmdStan.update_R_file",
+    "category": "function",
+    "text": "updateRfile\n\nRewrite a dictionary of observed data or initial parameter values in R dump file format to a file. \n\nMethod\n\nupdate_R_file{T<:Any}(file, dct)\n\nRequired arguments\n\n* `file::String`                : R file name\n* `dct::Dict{String, T}`        : Dictionary to format in R\n\n\n\n\n\n"
+},
+
+{
     "location": "index.html#Utilities-1",
     "page": "Home",
     "title": "Utilities",
     "category": "section",
-    "text": "CmdStan.cmdline\nCmdStan.check_dct_type\nCmdStan.update_R_file\nCmdStan.par\nCmdStan.read_optimize\nCmdStan.read_samples\nCmdStan.read_variational\nCmdStan.convert_a3d\nCmdStan.Fixed_param\nCmdStan.read_diagnose"
+    "text": "CmdStan.cmdline\nCmdStan.check_dct_type\nCmdStan.convert_a3d\nCmdStan.Fixed_param\nCmdStan.par\nCmdStan.read_optimize\nCmdStan.read_samples\nCmdStan.read_variational\nCmdStan.read_diagnose\nCmdStan.update_R_file"
 },
 
 {
