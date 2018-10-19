@@ -157,7 +157,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Testing",
     "category": "section",
-    "text": "Versions 4.x of the package has been tested on Mac OSX 10.13 &14, Julia 1.0 and cmdstan 2.17.1."
+    "text": "Versions 5.x of the package has been tested on Mac OSX 10.13 &14, Julia 1.0 and cmdstan 2.18.0."
+},
+
+{
+    "location": "VERSIONS.html#Version-5.0.0-1",
+    "page": "Versions",
+    "title": "Version 5.0.0",
+    "category": "section",
+    "text": "Pkg3 based."
 },
 
 {
