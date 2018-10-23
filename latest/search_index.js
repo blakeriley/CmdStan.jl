@@ -29,7 +29,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Introduction",
     "title": "StanJulia",
     "category": "section",
-    "text": "CmdStan.jl is part of the StanJulia Github organization set of packages. It captures draws from a Stan language program and returns an array of values for each accepted draw for each monitored varable in all chains.Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. as much as possible an attempt has been made to leverage below mentioned MCMC package options available in Julia to make comparisons easier.On a very high level, a typical workflow for using StanJulia, e.g. to handle postprocessing by TuringLang\'s MCMCChain.jl, will look like:using CmdStan, StanMCMCChain, MCMCChain, StatsBase\n\n# Define a Stan language program.\nbernoulli = \"...\"\n\n# Prepare for calling cmdstan.\nstanmodel = StanModel(..., output_format=:mcmcchain)\n\n# Compile and run Stan program, collect draws.\nrc, mcmcchain, cnames = stan(...)    \n\n# Example of postprocessing, e.g. Highest Posterior Density Interval.\nMCMCChain.hpd(mcmcchain[:, 8, :])\n\n# Plot the draws for a variable.\nplot(mcmcchain[:, 8, :], [:mixeddensity, :autocor, :mean])\nsavefig(\"bernoulli.pdf\")  # save to a pdf fileThis workflow uses StanMCMCChain.jl to create an MCMCChain.jl object for further processing by TuringLang/MCMCChain. A similar workflow is available for Mamba [StanMamba.jl. Another option is to convert the array of draw values to a DataFrame using StanDataFrames.jl.The default value for the output_format argument in Stanmodel() is :array which causes stan() to call a (dummy) conversion method convert_a3d() and returns an array of values.Currently 3 other values for output_format are used, i.e. :dataframe, :mambachain and :mcmcchain. The associated methods for convert_a3d are provided by StanDataFrames, StanMamba and StanMCMCChain."
+    "text": "CmdStan.jl is part of the StanJulia Github organization set of packages. It captures draws from a Stan language program and returns an array of values for each accepted draw for each monitored varable in all chains.Other packages in StanJulia are either extensions, postprocessing of the draws or plotting of the results. as much as possible an attempt has been made to leverage below mentioned MCMC package options available in Julia to make comparisons easier.On a very high level, a typical workflow for using StanJulia, e.g. to handle postprocessing by TuringLang\'s MCMCChain.jl, will look like:using CmdStan, StanMCMCChain, MCMCChain, StatsBase\n\n# Define a Stan language program.\nbernoulli = \"...\"\n\n# Prepare for calling cmdstan.\nstanmodel = StanModel(..., output_format=:mcmcchain)\n\n# Compile and run Stan program, collect draws.\nrc, mcmcchain, cnames = stan(...)    \n\n# Example of postprocessing, e.g. Highest Posterior Density Interval.\nMCMCChain.hpd(mcmcchain[:, 8, :])\n\n# Plot the draws for a variable.\nplot(mcmcchain[:, 8, :], [:mixeddensity, :autocor, :mean])\nsavefig(\"bernoulli.pdf\")  # save to a pdf fileThis workflow uses StanMCMCChain.jl to create an MCMCChain.jl object for further processing by TuringLang/MCMCChain. A similar workflow is available for Mamba [StanMamba.jl. Another option is to convert the array of draw values to a DataFrame using StanDataFrames.jl.The default value for the output_format argument in Stanmodel() is :array which causes stan() to call a (dummy) conversion method convert_a3d() and returns an array of values.Currently 4 other values for output_format are used, i.e. :dataframe, :mambachain and :mcmcchain. The associated methods for convert_a3d are provided by StanDataFrames, StanMamba and StanMCMCChain. CmdStan.jl also provides the output_format option :namedarray"
 },
 
 {
@@ -69,15 +69,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Installation",
     "title": "Minimal requirement",
     "category": "section",
-    "text": "Note: CmdStan.jl and CmdStan refer this Julia package. The executable C++ program is \'cmdstan\'.To run this version of the CmdStan.jl package on your local machine, it assumes that the  cmdstan executable is properly installed.In order for CmdStan.jl to find the cmdstan you need to set the environment variable JULIA_CMDSTAN_HOME to point to the cmdstan directory, e.g. addexport JULIA_CMDSTAN_HOME=/Users/rob/Projects/Stan/cmdstan\nlaunchctl setenv JULIA_CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstanto .bash_profile or config/startup.jl. I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.Currently tested with cmdstan 2.17.1"
-},
-
-{
-    "location": "INSTALLATION.html#Linux-options-1",
-    "page": "Installation",
-    "title": "Linux options",
-    "category": "section",
-    "text": "For those who are using a Linux based operating system. These are the cmdstan installation instructions using Linuxbrew. Please note that you must have Linuxbrew installed on your machine prior to going through these steps.Executing in a terminal:\n\'\'\'\nbrew tap brewsci/science\nbrew install cmdstan\n\'\'\'\nshould install the latest available cmdstan in /home/usrname/.linuxbrew/Cellar/cmdstan/x.x.x:Then set JULIA_CMDSTAN_HOME to point to where your local installation of cmdstan lives.Note: Is this still valid?"
+    "text": "Note: CmdStan.jl and CmdStan refer this Julia package. The executable C++ program is \'cmdstan\'.To run this version of the CmdStan.jl package on your local machine, it assumes that the  cmdstan executable is properly installed.In order for CmdStan.jl to find the cmdstan you need to set the environment variable JULIA_CMDSTAN_HOME to point to the cmdstan directory, e.g. addexport JULIA_CMDSTAN_HOME=/Users/rob/Projects/Stan/cmdstan\nlaunchctl setenv JULIA_CMDSTAN_HOME /Users/rob/Projects/Stan/cmdstanto .bash_profile or config/startup.jl. I typically prefer cmdstan not to include the cmdstan version number so no update is needed when cmdstan is updated.Currently tested with cmdstan 2.18.0"
 },
 
 {
@@ -101,7 +93,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Walkthrough",
     "title": "Bernoulli example",
     "category": "section",
-    "text": "In this walk-through, it is assumed that \'ProjDir\' holds a path to where transient files will be created (in a subdirectory /tmp of ProjDir).Make CmdStan.jl available:using CmdStanNext define the variable \'bernoullistanmodel\' to hold the Stan model definition:const bernoullistanmodel = \"\ndata { \n  int<lower=0> N; \n  int<lower=0,upper=1> y[N];\n} \nparameters {\n  real<lower=0,upper=1> theta;\n} \nmodel {\n  theta ~ beta(1,1);\n    y ~ bernoulli(theta);\n}\n\"The next step is to create a Stanmodel object. The most common way to create such an object is by giving the model a name while the Stan model is passed in, both through keyword (hence optional) arguments:stanmodel = Stanmodel(name=\"bernoulli\", model=bernoullistanmodel);\nstanmodel |> displayAbove Stanmodel() call creates a default model for sampling. Other arguments to Stanmodel() can be found in StanmodelThe observed input data is defined below.const bernoullidata = Dict(\"N\" => 10, \"y\" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])Run the simulation by calling stan(), passing in the data and the intended working directory. rc, sim1, cnames = stan(stanmodel, [bernoullidata], ProjDir, CmdStanDir=CMDSTAN_HOME)More documentation on stan() can be found in stanIf the return code rc indicated success (rc == 0), cmdstan execution completed succesfully.The first time (or when updates to the model have been made) stan() will compile the model and create the executable.On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from either ~/.juliarc.jl or an environment variable (see the Requirements section).By default stan() will run 4 chains and optionally display a combined summary. Some other CmdStan methods, e.g. optimize, return a dictionary."
+    "text": "In this walk-through, it is assumed that \'ProjDir\' holds a path to where transient files will be created (in a subdirectory /tmp of ProjDir).Make CmdStan.jl available:using CmdStanNext define the variable \'bernoullistanmodel\' to hold the Stan model definition:const bernoullistanmodel = \"\ndata { \n  int<lower=0> N; \n  int<lower=0,upper=1> y[N];\n} \nparameters {\n  real<lower=0,upper=1> theta;\n} \nmodel {\n  theta ~ beta(1,1);\n    y ~ bernoulli(theta);\n}\n\"The next step is to create a Stanmodel object. The most common way to create such an object is by giving the model a name while the Stan model is passed in, both through keyword (hence optional) arguments:stanmodel = Stanmodel(name=\"bernoulli\", model=bernoullistanmodel);\nstanmodel |> displayAbove Stanmodel() call creates a default model for sampling. Other arguments to Stanmodel() can be found in StanmodelThe observed input data is defined below.const bernoullidata = Dict(\"N\" => 10, \"y\" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])Run the simulation by calling stan(), passing in the data and the intended working directory. rc, sim1, cnames = stan(stanmodel, [bernoullidata], ProjDir, CmdStanDir=CMDSTAN_HOME)More documentation on stan() can be found in stanIf the return code rc indicated success (rc == 0), cmdstan execution completed succesfully.The first time (or when updates to the model have been made) stan() will compile the model and create the executable.On Windows, the CmdStanDir argument appears needed (this is still being investigated). On OSX/Unix CmdStanDir is obtained from an environment variable (see the Requirements section).By default stan() will run 4 chains and optionally display a combined summary. Some other CmdStan methods, e.g. optimize, return a dictionary."
 },
 
 {
@@ -157,21 +149,21 @@ var documenterSearchIndex = {"docs": [
     "page": "Versions",
     "title": "Testing",
     "category": "section",
-    "text": "Versions 5.x of the package has been tested on Mac OSX 10.13 &14, Julia 1.0 and cmdstan 2.18.0."
+    "text": "Versions 4.4 of the package has been tested on Mac OSX 10.14, Julia 1.0 and cmdstan 2.18.0."
 },
 
 {
-    "location": "VERSIONS.html#Version-5.0.0-1",
+    "location": "VERSIONS.html#Version-4.4.0-1",
     "page": "Versions",
-    "title": "Version 5.0.0",
+    "title": "Version 4.4.0",
     "category": "section",
-    "text": "Pkg3 based."
+    "text": "Pkg3 based.\nAdded the output_format option :namedarray which will return a NamesArrays object instead of the a3d array."
 },
 
 {
-    "location": "VERSIONS.html#Version-4.2.0-1",
+    "location": "VERSIONS.html#Version-4.2.0/4.3.0-1",
     "page": "Versions",
-    "title": "Version 4.2.0",
+    "title": "Version 4.2.0/4.3.0",
     "category": "section",
     "text": "Added ability to reformat a3d_array to a TuringLang/MCMCChain object.\nAdded the ability to display the sample drawing progress in stdout (instead of storing these updated in the runlogfile)"
 },
